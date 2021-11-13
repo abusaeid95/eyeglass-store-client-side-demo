@@ -82,6 +82,7 @@ const AddProduct = () => {
             <textarea
               placeholder="Product Description"
               name="description"
+              onBlur={handleOnBlur}
               id=""
               cols="30"
               rows="10"

@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import "./Banner.css";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -14,7 +15,7 @@ const Banner = () => {
         />
         <Carousel.Caption>
           <h5>First slide label</h5>
-          <Button variant="danger">Browse More</Button>
+          <Link to="/eyeglasses"><Button variant="danger">Browse More</Button></Link>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -26,8 +27,7 @@ const Banner = () => {
         />
         <Carousel.Caption>
           <h5>Second slide label</h5>
-          <Button variant="danger">Browse More</Button>{" "}
-          <Button variant="info">Info</Button>
+          <Link to="/eyeglasses"><Button variant="danger">Browse More</Button></Link>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -39,8 +39,7 @@ const Banner = () => {
         />
         <Carousel.Caption>
           <h5>Second slide label</h5>
-          <Button variant="danger">Browse More</Button>{" "}
-          <Button variant="info">Info</Button>
+          <Link to="/eyeglasses"><Button variant="danger">Browse More</Button></Link>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -52,8 +51,7 @@ const Banner = () => {
         />
         <Carousel.Caption>
           <h5>last slide label</h5>
-          <Button variant="danger">Browse More</Button>
-          <Button variant="info">Info</Button>
+          <Link to="/eyeglasses"><Button variant="danger">Browse More</Button></Link>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>

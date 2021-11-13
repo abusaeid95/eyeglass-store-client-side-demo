@@ -24,14 +24,14 @@ const Register = () => {
     if (registerData.password !== registerData.password2) {
         alert("Password Does Not Match");
       }
-      registerUser(registerData.email, registerData.password,registerData.name, history);
+      registerUser(registerData?.email, registerData?.password,registerData?.name, history);
     e.preventDefault();
   };
   return (
     <div>
       <div className="register-main">
         <h1>Register</h1>
-        {!isLoading && (<form onSubmit={handleRegisterSubmit}>
+       <form onSubmit={handleRegisterSubmit}>
           <div className="register-row">
             <label for="name">Name</label>
             <input
@@ -59,6 +59,14 @@ const Register = () => {
             <label for="password2">Password</label>
             <input type="password" name="password2" onBlur={handleOnBlur} />
           </div>
+          <div className="register-row">
+            <label for="phone">PhoneNumber</label>
+            <input type="number" name="phoneNumber" onBlur={handleOnBlur} />
+          </div>
+          <div className="register-row">
+            <label for="address">Address</label>
+            <input type="text" name="address" onBlur={handleOnBlur} />
+          </div>
           <button className="registerbtn" type="submit">
             Register
           </button>
@@ -77,10 +85,10 @@ const Register = () => {
             </div>
             <Link to="/login">Already Register? Please Login!</Link>
           </div>
-        </form>)}
-        {isLoading && <Spinner animation="border" variant="info" />}
-        {user?.email&& alert("Register Successful!!")}
-        {authError && alert(`${authError}`)}
+        </form>
+        {/* {isLoading && <Spinner animation="border" variant="info" />} */}
+       
+        {/* {authError && alert(`${authError}`)} */}
       </div>
     </div>
   );

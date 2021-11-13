@@ -6,6 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 
 const MenuBar = () => {
   const { user, logout } = useAuth();
+  console.log(user);
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -19,43 +20,21 @@ const MenuBar = () => {
               <Nav.Link as={HashLink} to="/">
                 HOME
               </Nav.Link>
-              <Nav.Link as={HashLink} to="#">
+              {/* <Nav.Link as={HashLink} to="/eyeglasses">
                 EYEGLASSES
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link as={HashLink} to="#">
-                SUNGLASSES
+              ABOUT
               </Nav.Link>
-              <Nav.Link as={HashLink} to="#">
-                BLUE LIGHT GLASSES
-              </Nav.Link>
-              <Nav.Link as={HashLink} to="#">
-                OVERSIZED STYLES
-              </Nav.Link>
-              <Nav.Link as={HashLink} to="#">
-                ABOUT
+              <Nav.Link as={HashLink} to="/contact">
+                CONTACT
               </Nav.Link>
             </Nav>
             <Nav>
               {user?.email ?<Nav>
-                <NavDropdown
-                  className="d-flex text-center align-items-center justify-content-center"
-                  title="Profile"
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item as={HashLink} to="#action/3.1">
-                    Action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={HashLink} to="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={HashLink} to="#action/3.3">
-                    Something
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={HashLink} to="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link as={HashLink} to="/dashboard">
+                  {user?.displayName}
+                </Nav.Link>
                 <Nav.Link as={HashLink} to="/dashboard">
                   DASHBOARD
                 </Nav.Link>

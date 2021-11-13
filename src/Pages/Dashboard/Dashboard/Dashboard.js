@@ -1,5 +1,6 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import './Dashboard.css'
+import { Col, Nav, Row } from "react-bootstrap";
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,89 +9,94 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import AddProduct from "../../AddProduct/AddProduct";
+import AddProduct from "../AdminDashboard/AddProduct/AddProduct";
+import MakeAdmin from "../AdminDashboard/MakeAdmin/MakeAdmin";
+import ManageAllOrders from "../AdminDashboard/ManageAllOrder/ManageAllOrders";
+import ManageProducts from "../AdminDashboard/ManageProducts/ManageProducts";
+import DashboardHome from "../DashboardHome/DashboardHome";
+import MyOrders from "../UserDashboard/MyOrders/MyOrders";
+import useAuth from "../../../Hooks/useAuth";
+import PrivateRoute from "../../../PrivateRoute/PrivateRoute";
+import AdminRoute from "../../../AdminRoute/AdminRoute";
 
-export default function NestingExample() {
+
+const Dashboard = () => {
+  let { path, url } = useRouteMatch();
+  const {isAdmin,user,logout}=useAuth();
   return (
-    <Router>
+    <div>
       <Row>
-        <Col sx={12} md={2} className="bg-dark">
-          <ul>
+        <Col sx={12} md={2}>
+          {
+            user?.email && !isAdmin && <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to={`${url}`}>Dashboard</Link>
+            </li>
+
+            <li>
+              <Link to={`${url}/myorders`}>My Orders</Link>
             </li>
             <li>
-              <Link to="/addproduct">Addproduct</Link>
+              <Link to={`${url}/review`}>Review</Link>
+            </li>
+            <li>
+              <Link to={`${url}/pay`}>pay</Link>
             </li>
           </ul>
+          }
+          
+         {
+             user?.email && isAdmin && <ul>
+             <li>
+               <Link to={`${url}`}>Dashboard</Link>
+             </li>
+             <li>
+               <Link to={`${url}/manageallorders`}>Manage All Orders</Link>
+             </li>
+             <li>
+               <Link to={`${url}/manageproducts`}>Manage Products</Link>
+             </li>
+             <li>
+               <Link to={`${url}/addproduct`}>Add A Product</Link>
+             </li>
+             <li>
+               <Link to={`${url}/makeadmin`}>Make Admin</Link>
+             </li>
+           </ul>
+         }
+          <button onClick={logout}>Logout</button>
         </Col>
 
         <Col sx={12} md={10}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/addproduct">
-              <AddProduct></AddProduct>
-            </Route>
-          </Switch>
+        <Switch>
+        <PrivateRoute exact path={path}>
+          <DashboardHome></DashboardHome>
+        </PrivateRoute>
+        <PrivateRoute path={`${path}/myorders`}>
+           <MyOrders></MyOrders>
+        </PrivateRoute>
+
+
+
+
+
+        <AdminRoute path={`${path}/manageallorders`}>
+            <ManageAllOrders></ManageAllOrders>
+        </AdminRoute>
+        <AdminRoute path={`${path}/manageproducts`}>
+            <ManageProducts></ManageProducts>
+        </AdminRoute>
+        <AdminRoute path={`${path}/addproduct`}>
+            <AddProduct></AddProduct>
+        </AdminRoute>
+        <AdminRoute path={`${path}/makeadmin`}>
+            <MakeAdmin></MakeAdmin>
+        </AdminRoute>
+      </Switch>
         </Col>
       </Row>
-    </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
     </div>
   );
-}
+};
 
-function Topics() {
-  // The `path` lets us build <Route> paths that are
-  // relative to the parent route, while the `url` lets
-  // us build relative links.
-  let { path, url } = useRouteMatch();
-
-  return (
-    <div>
-      <h2>Topics</h2>
-      <ul>
-        <li>
-          <Link to={`${url}/addproduct`}>Rendering with React</Link>
-        </li>
-        <li>
-          <Link to={`${url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${url}/props-v-state`}>Props v. State</Link>
-        </li>
-      </ul>
-
-      <Switch>
-        <Route exact path={path}>
-          <h3>Please select a topic.</h3>
-        </Route>
-        <Route path={`${path}/:topicId`}>
-          <Topic />
-        </Route>
-      </Switch>
-    </div>
-  );
-}
-
-function Topic() {
-  // The <Route> that rendered this component has a
-  // path of `/topics/:topicId`. The `:topicId` portion
-  // of the URL indicates a placeholder that we can
-  // get from `useParams()`.
-  let { topicId } = useParams();
-
-  return (
-    <div>
-      <h3>{topicId}</h3>
-    </div>
-  );
-}
+export default Dashboard;
