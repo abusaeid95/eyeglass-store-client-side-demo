@@ -23,8 +23,8 @@ const MenuBar = () => {
               {/* <Nav.Link as={HashLink} to="/eyeglasses">
                 EYEGLASSES
               </Nav.Link> */}
-              <Nav.Link as={HashLink} to="#">
-              ABOUT
+              <Nav.Link as={HashLink} to="/eyeglasses">
+              EYE GLASSES
               </Nav.Link>
               <Nav.Link as={HashLink} to="/contact">
                 CONTACT

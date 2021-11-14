@@ -42,11 +42,11 @@ function App() {
           <PrivateRoute path="/placeorder/:id">
             <PlaceOrder></PlaceOrder>
           </PrivateRoute>
-          <PrivateRoute path="/eyeglasses">
+          <Route path="/eyeglasses">
             <MenuBar></MenuBar>
             <EyeGlasses></EyeGlasses>
             <Footer></Footer>
-          </PrivateRoute>
+          </Route>
           <Route path="/contact">
             <MenuBar></MenuBar>
             <Contact></Contact>
