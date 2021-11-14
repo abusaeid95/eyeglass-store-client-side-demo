@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import './MakeAdmin.css'
 
 const MakeAdmin = () => {
   const {
@@ -30,10 +31,13 @@ const MakeAdmin = () => {
   };
   return (
     <div>
+      
+      <div className="makeadmin-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("email")} />
-        <input type="submit" />
+        <input className="admininputone" {...register("email")} />
+        <input className="admininputtwo" type="Submit" value="Make Admin" />
       </form>
+      </div>
     </div>
   );
 };

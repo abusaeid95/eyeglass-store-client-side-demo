@@ -54,7 +54,7 @@ const Login = () => {
           <div>
             <h4>Or Signin with social platforms</h4>
             <div className="footer-social-icon">
-              <button onClick={handleGoogleSignIn}>
+              <button onClick={handleGoogleSignIn} className="border-0 bg-transparent">
                 <i className="fab fa-google-plus-g google-bg"></i>
               </button>
               <Link to="">

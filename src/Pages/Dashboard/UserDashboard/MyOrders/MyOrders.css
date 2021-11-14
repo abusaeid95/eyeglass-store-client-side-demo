@@ -1,0 +1,10 @@
+.ofrimg img{
+    height: 105px!important;
+    width: 174px!important;
+}
+.ofrimg{
+    border: 1px solid rgb(187, 179, 179);
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+}

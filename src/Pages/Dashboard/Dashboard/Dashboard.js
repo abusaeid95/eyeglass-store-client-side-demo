@@ -1,12 +1,10 @@
 import React from "react";
 import './Dashboard.css'
-import { Col, Nav, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import {
-  BrowserRouter as Router,
   Switch,
-  Route,
   Link,
-  useParams,
+
   useRouteMatch,
 } from "react-router-dom";
 import AddProduct from "../AdminDashboard/AddProduct/AddProduct";
@@ -18,6 +16,8 @@ import MyOrders from "../UserDashboard/MyOrders/MyOrders";
 import useAuth from "../../../Hooks/useAuth";
 import PrivateRoute from "../../../PrivateRoute/PrivateRoute";
 import AdminRoute from "../../../AdminRoute/AdminRoute";
+import Review from "../UserDashboard/Review/Review";
+import Payment from "../UserDashboard/Payment/Payment";
 
 
 const Dashboard = () => {
@@ -30,8 +30,11 @@ const Dashboard = () => {
           {
             user?.email && !isAdmin && <ul>
             <li>
-              <Link to={`${url}`}>Dashboard</Link>
+              <Link to='/'>Home</Link>
             </li>
+            {/* <li>
+              <Link to={`${url}`}>Dashboard</Link>
+            </li> */}
 
             <li>
               <Link to={`${url}/myorders`}>My Orders</Link>
@@ -40,7 +43,7 @@ const Dashboard = () => {
               <Link to={`${url}/review`}>Review</Link>
             </li>
             <li>
-              <Link to={`${url}/pay`}>pay</Link>
+              <Link to={`${url}/payment`}>Payment</Link>
             </li>
           </ul>
           }
@@ -73,11 +76,14 @@ const Dashboard = () => {
           <DashboardHome></DashboardHome>
         </PrivateRoute>
         <PrivateRoute path={`${path}/myorders`}>
-           <MyOrders></MyOrders>
+          <MyOrders></MyOrders>
         </PrivateRoute>
-
-
-
+        <PrivateRoute path={`${path}/review`}>
+          <Review></Review>
+        </PrivateRoute>
+        <PrivateRoute path={`${path}/payment`}>
+          <Payment></Payment>
+        </PrivateRoute>
 
 
         <AdminRoute path={`${path}/manageallorders`}>

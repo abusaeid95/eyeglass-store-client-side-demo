@@ -1,7 +1,10 @@
+
 import axios from "axios";
+import './MyOrders.css'
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import useAuth from "../../../../Hooks/useAuth";
+
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -14,7 +17,9 @@ const MyOrders = () => {
   }, [user.email, statusDependancy]);
 
   const handlerStausDelete = (id) => {
-    axios
+    const proceed = window.confirm('Are you want to cancel?')
+    if(proceed){
+        axios
       .delete(`http://localhost:5000/allorders/${id}`)
       .then(function (response) {
         // handle success
@@ -26,31 +31,62 @@ const MyOrders = () => {
       .catch(function (error) {
         // handle error
       });
+    }
+    
   };
-  console.log(myOrders);
   return (
+
+
     <>
-      <Row xs={1} md={2} className="g-4">
-        {myOrders.map((order) => (
-          <Col>
+
             <Card>
-              <Card.Img variant="top" src={order?.productImg} />
-              <Card.Body>
-                <Card.Title>{order?.productName}</Card.Title>
-                <Card.Text>{order?.productPrice}</Card.Text>
-                <Card.Text>{order?.satus}</Card.Text>
-                <button
-                  onClick={() => handlerStausDelete(order?._id)}
-                  className="tablebtn"
-                >
-                  Delete
-                </button>
-              </Card.Body>
+                {
+                  myOrders.map(myorder=>
+                  <Card.Body>
+                    <div className="row ofrimg">
+                        <div className="col">
+                            <h3>{myorder.productName}</h3>
+                        </div>
+                        <div className="col">
+                            <h3>{myorder.status}</h3>
+                        </div>
+                        <div className="col">
+                            <h3>$ {myorder.productPrice}</h3>
+                        </div>
+                        <div className="col">
+                            <h3><img src={myorder.productImg} alt="" /></h3>
+                        </div>
+                        <div className="col mt-auto mb-auto ">
+                            <button onClick={()=>handlerStausDelete(myorder._id)} className="bg-danger p-2 px-4 me-2 rounded text-white">Cancel</button>
+                        </div>
+                    </div>
+
+                </Card.Body>)      
+                }
             </Card>
-          </Col>
-        ))}
-      </Row>
-    </>
+        </>
+    // <>
+    //   <Row xs={1} md={2} className="g-4">
+    //     {myOrders.map((order) => (
+    //       <Col>
+    //         <Card>
+    //           <Card.Img variant="top" src={order?.productImg} />
+    //           <Card.Body>
+    //             <Card.Title>{order?.productName}</Card.Title>
+    //             <Card.Text>{order?.productPrice}</Card.Text>
+    //             <Card.Text>{order?.satus}</Card.Text>
+    //             <button
+    //               onClick={() => handlerStausDelete(order?._id)}
+    //               className="tablebtn"
+    //             >
+    //               Delete
+    //             </button>
+    //           </Card.Body>
+    //         </Card>
+    //       </Col>
+    //     ))}
+    //   </Row>
+    // </>
   );
 };
 

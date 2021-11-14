@@ -1,0 +1,43 @@
+
+.container-review {
+  /* position: absolute; */
+  width: 100%;
+
+}
+
+.card-review {
+  height: 90%;
+  padding: auto;
+  text-align: center;
+  background: #242625;
+  border-radius: 10px;
+
+}
+.card__container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+.card__content {
+  width: 90%;
+  height: 95%;
+  background: #191a19;
+  margin: 10px auto;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+
+  transition: 0.3s all ease-in-out;
+}
+.card__content:hover {
+  margin-top: -10px;
+}
+.card__header {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin: 40px auto;
+}
+.icon-color{
+    color: #f8b704;
+}

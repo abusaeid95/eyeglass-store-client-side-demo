@@ -48,7 +48,9 @@ function App() {
             <Footer></Footer>
           </PrivateRoute>
           <Route path="/contact">
+            <MenuBar></MenuBar>
             <Contact></Contact>
+            <Footer></Footer>
           </Route>
           <Route path="/dashboard">
             <Dashboard></Dashboard>
