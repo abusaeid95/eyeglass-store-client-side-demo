@@ -11,8 +11,8 @@
 
 # [Server Side Repository Link](https://github.com/programming-hero-web-course-4/niche-website-server-side-abusaeid95)
 
-- SDC_EYEGLASSES STORE online platform.
-- Authorised users can purchased products.
-- Admin & User's has defferent dashboard.
-- Individual orders manageable.
-- All orders are manageable as authorised user.
+# SDC_EYEGLASSES STORE online platform.
+# Authorised users can purchased products.
+# Admin & User's has defferent dashboard.
+# Individual orders manageable.
+# All orders are manageable as authorised user.
