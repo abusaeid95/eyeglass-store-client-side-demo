@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithPopup,
-  GoogleAuthProvider
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 // initialize firebase app
@@ -20,8 +20,6 @@ const useFirebase = () => {
   const [authError, setAuthError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminLoading, setisAdminLoading] = useState(false);
-
-
 
   const googleProvider = new GoogleAuthProvider();
 
@@ -35,7 +33,7 @@ const useFirebase = () => {
         const newUser = { email, displayName: name };
         setUser(newUser);
         history.replace("/");
-        saveUser(email,name,"POST")
+        saveUser(email, name, "POST");
         // send name to firebase after creation
         updateProfile(auth.currentUser, {
           displayName: name,
@@ -52,30 +50,32 @@ const useFirebase = () => {
   const loginUser = (email, password, location, history) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const destination = location?.state?.from || '/';
-            history.replace(destination);
-            setAuthError('');
-        })
-        .catch((error) => {
-            setAuthError(error.message);
-        })
-        .finally(() => setIsLoading(false));
-}
+      .then((userCredential) => {
+        const destination = location?.state?.from || "/";
+        history.replace(destination);
+        setAuthError("");
+      })
+      .catch((error) => {
+        setAuthError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const signInWithGoogle = (location, history) => {
     setIsLoading(true);
     signInWithPopup(auth, googleProvider)
-        .then((result) => {
-            const user = result.user;
-            saveUser(user.email, user.displayName, 'PUT');
-            setAuthError('');
-            const destination = location?.state?.from || '/';
-            history.replace(destination);
-        }).catch((error) => {
-            setAuthError(error.message);
-        }).finally(() => setIsLoading(false));
-}
+      .then((result) => {
+        const user = result.user;
+        saveUser(user.email, user.displayName, "PUT");
+        setAuthError("");
+        const destination = location?.state?.from || "/";
+        history.replace(destination);
+      })
+      .catch((error) => {
+        setAuthError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   // onAuthStateChanged
   useEffect(() => {
@@ -103,31 +103,29 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
-      // save user
-      const saveUser = (email, displayName, method) => {
-        const users = { email, displayName };
-        fetch('http://localhost:5000/users', {
-            method: method,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(users)
-        }).then(res => res.json())
-            .then(data => console.log(data))
-    }
+  // save user
+  const saveUser = (email, displayName, method) => {
+    const users = { email, displayName };
+    fetch("https://glacial-chamber-66798.herokuapp.com/users", {
+      method: method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
-    
-    // is Admin
-    useEffect(() => {
-      fetch(`http://localhost:5000/users/${user?.email}`)
-          .then(res => res.json())
-          .then(data => {
-             
-            
-              setIsAdmin(data.admin)
-              setisAdminLoading(false)
-          })
-  }, [user?.email])
+  // is Admin
+  useEffect(() => {
+    fetch(`https://glacial-chamber-66798.herokuapp.com/users/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setIsAdmin(data.admin);
+        setisAdminLoading(false);
+      });
+  }, [user?.email]);
 
   return {
     user,
@@ -138,7 +136,7 @@ const useFirebase = () => {
     isLoading,
     isAdmin,
     authError,
-    signInWithGoogle
+    signInWithGoogle,
   };
 };
 export default useFirebase;

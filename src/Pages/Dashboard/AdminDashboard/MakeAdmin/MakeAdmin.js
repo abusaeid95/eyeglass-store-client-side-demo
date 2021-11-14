@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import './MakeAdmin.css'
+import "./MakeAdmin.css";
 
 const MakeAdmin = () => {
   const {
@@ -10,9 +10,9 @@ const MakeAdmin = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data,e) => {
+  const onSubmit = (data, e) => {
     const user = { email: data.email };
-    fetch("http://localhost:5000/users/admin", {
+    fetch("https://glacial-chamber-66798.herokuapp.com/users/admin", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -24,19 +24,18 @@ const MakeAdmin = () => {
         console.log(data);
         if (data.modifiedCount) {
           alert("make admin successfully");
-          reset()
+          reset();
         }
       });
     e.preventDefault();
   };
   return (
     <div>
-      
       <div className="makeadmin-container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input className="admininputone" {...register("email")} />
-        <input className="admininputtwo" type="Submit" value="Make Admin" />
-      </form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input className="admininputone" {...register("email")} />
+          <input className="admininputtwo" type="Submit" value="Make Admin" />
+        </form>
       </div>
     </div>
   );

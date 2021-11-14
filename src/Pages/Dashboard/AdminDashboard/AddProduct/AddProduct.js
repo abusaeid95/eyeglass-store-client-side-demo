@@ -13,7 +13,7 @@ const AddProduct = () => {
   };
   const handleaddproductSubmit = (e) => {
     const product = { ...addProduct };
-    fetch("http://localhost:5000/products", {
+    fetch("https://glacial-chamber-66798.herokuapp.com/products", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(product),
@@ -25,7 +25,6 @@ const AddProduct = () => {
         }
         e.preventDefault();
       });
-    
   };
 
   return (

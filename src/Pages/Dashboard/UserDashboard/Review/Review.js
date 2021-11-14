@@ -15,13 +15,16 @@ const Review = () => {
     setReviewDetails(newreviewData);
   };
 
-  const handlereviewSubmit =() => {
+  const handlereviewSubmit = () => {
     reviewDetails.user_email = user?.email;
     reviewDetails.user_name = user?.displayName;
     reviewDetails.user_photoUrl = user?.photoURL;
     console.log(reviewDetails);
     axios
-      .post("http://localhost:5000/reviews", reviewDetails)
+      .post(
+        "https://glacial-chamber-66798.herokuapp.com/reviews",
+        reviewDetails
+      )
       .then(function (response) {
         // handle success
         if (response.data.insertedId) {

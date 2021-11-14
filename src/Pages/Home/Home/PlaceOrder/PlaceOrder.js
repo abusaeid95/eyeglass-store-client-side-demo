@@ -13,7 +13,7 @@ const PlaceOrder = () => {
   const redirect_url = location.state?.from || "/";
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders/${id}`)
+    fetch(`https://glacial-chamber-66798.herokuapp.com/orders/${id}`)
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, []);
@@ -25,7 +25,7 @@ const PlaceOrder = () => {
     data.productImg = orders?.img;
     data.status = "pending";
     data.user_email = user?.email;
-    fetch("http://localhost:5000/allorders", {
+    fetch("https://glacial-chamber-66798.herokuapp.com/allorders", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
